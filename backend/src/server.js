@@ -8,8 +8,8 @@ const __dirname = path.resolve();
 app.get('/health', (req, res) => {
     res.status(200).json({ message: "Hello World!" });
 });
-app.get('/books', (req, res) => {
-    res.status(200).json({ message: "Books endpoint" });
+app.get('/', (req, res) => {
+    res.status(200).json({ message: "Good now" });
 });
 
 // make our app ready for deployment
