@@ -9,7 +9,8 @@ app.get('/health', (req, res) => {
     res.status(200).json({ message: "Hello World!" });
 });
 app.get('/', (req, res) => {
-    res.status(200).json({ message: "Good now" });
+    res.send("Backend is running 🚀");
+    // res.status(200).json({ message: "Good now" });
 });
 
 // make our app ready for deployment
