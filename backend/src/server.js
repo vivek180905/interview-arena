@@ -6,6 +6,8 @@ import { connectDB } from './lib/db.js';
 import cors from 'cors';
 import {serve} from "inngest/express";
 import { inngest, functions } from './lib/inngest.js'; 
+import { clerkMiddleware } from '@clerk/express'
+import chatRoutes from './routes/chatRoutes.js';
 
 const app = express();
 const __dirname = path.resolve();
@@ -16,10 +18,13 @@ app.use(express.json());
 // By setting credentials: true, we allow cookies and other credentials to be sent along with the requests from the frontend to the backend, enabling features like authentication and session management.
 app.use(cors({origin:ENV.CLIENT_URL , credentials: true}));
 
-
+app.use(clerkMiddleware()); // this adds auth field to request object : req.auth which has userId, sessionId and getToken function to get the token of the user.
 app.get('/health', (req, res) => {
     res.status(200).json({ message: "Hello World!" });
 });
+
+
+
 app.get('/', (req, res) => {
     res.send("Backend is running 🚀");
     // res.status(200).json({ message: "Good now" });
