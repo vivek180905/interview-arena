@@ -3,6 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { ClerkProvider } from '@clerk/react'
+import { BrowserRouter } from 'react-router'
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
 
 // const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -10,10 +16,17 @@ import { ClerkProvider } from '@clerk/react'
 //   throw new Error("VITE_CLERK_PUBLISHABLE_KEY is not defined in environment variables");
 // }
 
+
+const queryClient = new QueryClient()
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+     <BrowserRouter> 
+     < QueryClientProvider client={queryClient}>
      <ClerkProvider >
       <App />
     </ClerkProvider>
+    </QueryClientProvider>
+     </BrowserRouter>
   </StrictMode>,
 )
